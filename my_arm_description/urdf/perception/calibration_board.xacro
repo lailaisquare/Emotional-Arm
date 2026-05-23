@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:macro name="calibration_board" params="name xyz rpy marker_size:=0.1">
+    
+    <link name="${name}">
+      <visual>
+        <geometry>
+          <box size="${marker_size} ${marker_size} 0.002"/>
+        </geometry>
+        <material name="white"/>
+      </visual>
+      <inertial>
+        <mass value="0.01"/>
+        <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6"/>
+      </inertial>
+    </link>
+
+    <joint name="${name}_joint" type="fixed">
+      <parent link="world"/>
+      <child link="${name}"/>
+      <origin xyz="${xyz}" rpy="${rpy}"/>
+    </joint>
+
+    <!-- 标定板上的二维码视觉标记 -->
+    <gazebo reference="${name}">
+      <visual>
+        <plugin filename="ArUcoMap" name="aruco_map::ArUcoMap">
+          <marker>
+            <id>2</id>
+            <size>${marker_size}</size>
+            <pos>0 0 0</pos>
+            <rot>0 0 0</rot>
+          </marker>
+        </plugin>
+      </visual>
+    </gazebo>
+
+  </xacro:macro>
+
+</robot>

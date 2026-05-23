@@ -1,0 +1,22 @@
+<?xml version="1.0" ?>
+<sdf version="1.8">
+  <model name="aruco_board">
+    <static>true</static>
+    <link name="board">
+      <visual name="board_visual">
+        <geometry><box><size>0.1 0.002 0.1</size></box></geometry>
+        <material>
+          <diffuse>1.0 1.0 1.0 1.0</diffuse>
+          <pbr>
+            <metal>
+              <albedo_map>model://aruco_board/materials/textures/aruco_2.png</albedo_map>
+            </metal>
+          </pbr>
+        </material>
+      </visual>
+      <collision name="board_collision">
+        <geometry><box><size>0.1 0.002 0.1</size></box></geometry>
+      </collision>
+    </link>
+  </model>
+</sdf>

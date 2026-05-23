@@ -1,0 +1,19 @@
+<?xml version="1.0" ?>
+<robot name="my_arm" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:include filename="$(find my_arm_description)/urdf/gazebo/my_arm.gazebo" />
+  <xacro:include filename="$(find my_arm_description)/urdf/control/my_arm.ros2control" />
+  <xacro:include filename="$(find my_arm_description)/urdf/core/my_arm.xacro" />
+
+  <!-- Gazebo ros2_control 插件 -->
+  <gazebo>
+    <plugin filename="libgz_ros2_control-system.so" name="gz_ros2_control::GazeboSimROS2ControlPlugin">
+      <parameters>$(find my_arm_description)/config/gazebo_control/controllers.yaml</parameters>
+      <ros>
+        <remapping>/robot_description:=/robot_description</remapping>
+      </ros>
+      <position_proportional_gain>500.0</position_proportional_gain>
+    </plugin>
+  </gazebo>
+
+</robot>
